@@ -10,6 +10,8 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 
 ## SiP32431 Key Specifications
 
+Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.pdf)
+
 | Parameter               | Value                              |
 |-------------------------|------------------------------------|
 | Operating voltage       | 1.5 V – 5.5 V                      |
