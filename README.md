@@ -51,14 +51,14 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 | R1       | 1 MΩ        | 0805             | Pull-down on EN pin                | [C17514](https://www.lcsc.com/product-detail/C17514.html)  |
 | C_IN1    | 1 µF        | 0805             | Input decoupling capacitor         | [C1712](https://www.lcsc.com/product-detail/C1712.html)   |
 | C_OUT1   | 100 nF      | 0805             | Output decoupling capacitor        | [C126469](https://www.lcsc.com/product-detail/C126469.html) |
-| J1       | —           | Half-hole 5-pin 2.54 mm | Edge connector (IN, OUT, GND, GND, EN) | — |
-| J2       | —           | PinSocket 1×5 2.54 mm (DNP¹) | Debug/development header  | — |
+| J1       | —           | PinSocket 1×5 2.54 mm     | Debug/development header           | — |
+| J2       | —           | Half-hole 5-pin 2.54 mm (DNP¹) | Edge connector (GND, GND, EN, OUT, IN) | — |
 
-> ¹ DNP = Do Not Populate (component is present in schematic/PCB for optional use but not assembled by default)
+> ¹ DNP = Do Not Populate — the half-hole edge connector (J2) is a PCB manufacturing feature: the through-holes are routed in half at the board edge to form castellated contacts. No separate component is soldered.
 >
 > LCSC Part # are ordering references for [lcsc.com](https://lcsc.com).
 
-## Connector Pinout (J1)
+## Connector Pinout (J2 — half-hole edge connector)
 
 | Pin | Signal | Description          |
 |-----|--------|----------------------|
