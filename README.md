@@ -6,7 +6,7 @@ Compact SMD peripheral load switch based on the Vishay SiP32431, designed for en
 
 ## Description
 
-A minimal, all-SMD load switch board for switching a peripheral's supply voltage under microcontroller control. The design uses the Vishay **SiP32431DR3** high-side switch in a SC-70-6 (SOT-363) package and connects via a 5-pin 2.54 mm half-hole edge connector suited for direct PCB-to-PCB soldering or castellated mounting.
+A minimal, all-SMD load switch board for switching a peripheral's supply voltage under microcontroller control. The design uses the Vishay **SiP32431DR3** high-side switch in a SC-70-6 (SOT-363) package. Board-edge castellated contacts (J2, half-hole, DNP) allow direct PCB-to-PCB soldering or surface mounting. An optional 5-pin 2.54 mm pitch pin header (J1) provides access for prototyping with breadboards or Dupont wires.
 
 ## SiP32431 Key Specifications
 
@@ -28,8 +28,8 @@ Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.p
 - All-SMD design; 0805 passives are (more or less) hand-solderable, SC-70-6 IC requires reflow soldering
 - 1 MΩ pull-down on EN pin ensures switch-off when enable is floating
 - 1 µF input and 100 nF output decoupling capacitors
-- 5-pin 2.54 mm pitch half-hole edge connector (J1) for PCB-to-PCB or castellated mounting
-- 5-pin 2.54 mm pitch pin socket (J2, DNP) for development/debug access
+- 5-pin 2.54 mm pitch half-hole edge connector (J2, DNP) — castellated board-edge contacts for PCB-to-PCB or surface mounting
+- 5-pin 2.54 mm pitch pin header (J1, optional) — for prototyping with breadboards or Dupont wires
 - DRC-clean design (0 violations, 0 unconnected pads)
 - KiCad 9 source files with custom `Edge_HalfHole_5Pin_2.54mm` footprint included
 
@@ -55,7 +55,7 @@ Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.p
 | R1       | 1 MΩ        | 0805             | Pull-down on EN pin                | [C17514](https://www.lcsc.com/product-detail/C17514.html)  |
 | C_IN1    | 1 µF        | 0805             | Input decoupling capacitor         | [C1712](https://www.lcsc.com/product-detail/C1712.html)   |
 | C_OUT1   | 100 nF      | 0805             | Output decoupling capacitor        | [C126469](https://www.lcsc.com/product-detail/C126469.html) |
-| J1       | —           | PinSocket 1×5 2.54 mm     | Debug/development header           | — |
+| J1       | —           | PinSocket 1×5 2.54 mm     | Optional pin header for prototyping | — |
 | J2       | —           | Half-hole 5-pin 2.54 mm (DNP¹) | Edge connector (GND, GND, EN, OUT, IN) | — |
 
 > ¹ DNP = Do Not Populate — the half-hole edge connector (J2) is a PCB manufacturing feature: the through-holes are routed in half at the board edge to form castellated contacts. No separate component is soldered.
