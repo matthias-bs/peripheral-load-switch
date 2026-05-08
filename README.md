@@ -29,7 +29,7 @@ Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.p
 - 1 MΩ pull-down on EN pin ensures switch-off when enable is floating
 - 1 µF input and 100 nF output decoupling capacitors
 - 5-pin 2.54 mm pitch half-hole edge connector (J2, DNP) — castellated board-edge contacts for PCB-to-PCB or surface mounting
-- 5-pin 2.54 mm pitch pin header (J1, optional) — for prototyping with breadboards or Dupont wires
+- 5-pin 2.54 mm pitch pin header (J1, optional) — for PCB-to-PCB stacking or prototyping with breadboards or Dupont wires
 - DRC-clean design (0 violations, 0 unconnected pads)
 - KiCad 9 source files with custom `Edge_HalfHole_5Pin_2.54mm` footprint included
 
