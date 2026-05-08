@@ -1,0 +1,21 @@
+# KiCad local settings (user-specific, not part of the design)
+*.kicad_prl
+
+# KiCad generated files
+fp-info-cache
+*.000
+*.bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_pro-bak
+
+# KiCad backup folders
+*-backups/
+
+# KiCad auto-generated files
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
