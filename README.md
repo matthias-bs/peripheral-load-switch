@@ -39,9 +39,9 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 
 ## Interactive 3D PCB View
 
-[![3D PCB render](docs/load_switch_3d_top.png)](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fmatthias-bs%2Fperipheral-load-switch%2Fblob%2Fmain%2Fload_switch.kicad_pcb)
+[![3D PCB render](docs/load_switch_3d_top.png)](https://github.com/matthias-bs/peripheral-load-switch/blob/main/docs/load_switch.glb)
 
-*Click image to open interactive 3D PCB viewer (KiCanvas)*
+*Click image to open the interactive 3D model (rotate/zoom) — or use [KiCanvas](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fmatthias-bs%2Fperipheral-load-switch%2Fblob%2Fmain%2Fload_switch.kicad_pcb) for a full PCB inspector*
 
 ## Bill of Materials
 
