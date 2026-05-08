@@ -43,14 +43,16 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 
 ## Bill of Materials
 
-| Ref      | Value       | Footprint        | Description                        | LCSC    |
-|----------|-------------|------------------|------------------------------------|---------|
-| U1       | SiP32431DR3 | SC-70-6 (SOT-363)| High-side load switch              | C141606 |
-| R1       | 1 MΩ        | 0805             | Pull-down on EN pin                | C17514  |
-| C_IN1    | 1 µF        | 0805             | Input decoupling capacitor         | C1712   |
-| C_OUT1   | 100 nF      | 0805             | Output decoupling capacitor        | C126469 |
+| Ref      | Value       | Footprint        | Description                        | LCSC Part # |
+|----------|-------------|------------------|------------------------------------|-------------|
+| U1       | SiP32431DR3 | SC-70-6 (SOT-363)| High-side load switch              | [C141606](https://www.lcsc.com/product-detail/C141606.html) |
+| R1       | 1 MΩ        | 0805             | Pull-down on EN pin                | [C17514](https://www.lcsc.com/product-detail/C17514.html)  |
+| C_IN1    | 1 µF        | 0805             | Input decoupling capacitor         | [C1712](https://www.lcsc.com/product-detail/C1712.html)   |
+| C_OUT1   | 100 nF      | 0805             | Output decoupling capacitor        | [C126469](https://www.lcsc.com/product-detail/C126469.html) |
 | J1       | —           | Half-hole 5-pin 2.54 mm | Edge connector (IN, OUT, GND, GND, EN) | — |
 | J2       | —           | PinSocket 1×5 2.54 mm (DNP) | Debug/development header  | — |
+
+> LCSC Part # are ordering references for [lcsc.com](https://lcsc.com).
 
 ## Connector Pinout (J1)
 
