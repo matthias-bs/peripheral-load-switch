@@ -23,7 +23,7 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 
 ## PCB & Schematic Features
 
-- All-SMD design, 0805 passives — hand-solderable
+- All-SMD design; 0805 passives are hand-solderable, SC-70-6 IC requires reflow soldering
 - 1 MΩ pull-down on EN pin ensures switch-off when enable is floating
 - 1 µF input and 100 nF output decoupling capacitors
 - 5-pin 2.54 mm pitch half-hole edge connector (J1) for PCB-to-PCB or castellated mounting
@@ -56,11 +56,11 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 
 | Pin | Signal | Description          |
 |-----|--------|----------------------|
-| 1   | IN     | Supply voltage input |
+| 1   | GND    | Ground               |
 | 2   | GND    | Ground               |
 | 3   | EN     | Enable (active-high) |
-| 4   | GND    | Ground               |
-| 5   | OUT    | Switched output      |
+| 4   | OUT    | Switched output      |
+| 5   | IN     | Supply voltage input |
 
 ## Production Files
 
