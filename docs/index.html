@@ -129,11 +129,37 @@
       (gltf) => {
         const model = gltf.scene;
 
-        // Enable shadows on all meshes
+        // Enable shadows and apply per-layer polygon offset to eliminate Z-fighting.
+        // KiCad names each PCB layer as a separate mesh: F.SilkS, B.SilkS, F.Mask,
+        // B.Mask, F.Cu, B.Cu, … Polygon offset pulls each layer slightly toward the
+        // camera in the depth buffer so coplanar surfaces don't flicker.
         model.traverse((child) => {
           if (child.isMesh) {
             child.castShadow = true;
             child.receiveShadow = true;
+
+            const name = (child.name || '').toLowerCase();
+            const mats = Array.isArray(child.material) ? child.material : [child.material];
+            const setOffset = (mat, factor, units) => {
+              if (!mat) return;
+              mat.polygonOffset = true;
+              mat.polygonOffsetFactor = factor;
+              mat.polygonOffsetUnits = units;
+            };
+
+            if (name.includes('silk')) {
+              // Silkscreen — topmost visible layer
+              mats.forEach(m => setOffset(m, -4, -4));
+              child.renderOrder = 3;
+            } else if (name.includes('mask')) {
+              // Soldermask — above copper
+              mats.forEach(m => setOffset(m, -2, -2));
+              child.renderOrder = 2;
+            } else if (name.includes('.cu') || name.includes('pad') || name.includes('track')) {
+              // Copper layers and pads
+              mats.forEach(m => setOffset(m, -1, -1));
+              child.renderOrder = 1;
+            }
           }
         });
 
