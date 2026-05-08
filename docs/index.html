@@ -71,8 +71,8 @@
     const loadingEl = document.getElementById('loading');
     const progressBar = document.getElementById('progress-bar');
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    // Renderer — logarithmicDepthBuffer eliminates Z-fighting between coplanar PCB layers
+    const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.shadowMap.enabled = true;
