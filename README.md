@@ -45,6 +45,8 @@ Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.p
 
 *Click image to open the interactive 3D model viewer (rotate/zoom/pan) — or use [KiCanvas](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fmatthias-bs%2Fperipheral-load-switch%2Fblob%2Fmain%2Fload_switch.kicad_pcb) for a full PCB layer inspector*
 
+> **How it was generated:** The 3D model ([`docs/load_switch.glb`](docs/load_switch.glb)) was exported from KiCad 9 using `kicad-cli pcb export glb` with tracks, pads, zones, silkscreen and soldermask included. The viewer ([`docs/index.html`](docs/index.html)) is a custom [Three.js](https://threejs.org/) page served via GitHub Pages.
+
 ## Bill of Materials
 
 | Ref      | Value       | Footprint        | Description                        | LCSC Part # |
