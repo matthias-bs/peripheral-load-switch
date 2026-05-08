@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>peripheral-load-switch — Interactive 3D PCB View</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a2e; color: #e0e0e0; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
+    header {
+      padding: 10px 20px;
+      background: #16213e;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #0f3460;
+    }
+    header h1 { font-size: 1rem; font-weight: 600; }
+    header a { color: #a0c4ff; font-size: 0.85rem; text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+    #hint {
+      font-size: 0.75rem;
+      color: #888;
+      padding: 4px 20px;
+      background: #12122a;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    #canvas-container { flex: 1; position: relative; }
+    canvas { display: block; width: 100% !important; height: 100% !important; }
+    #loading {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: #1a1a2e;
+      font-size: 0.9rem; color: #aaa;
+      gap: 12px;
+    }
+    #progress-bar-wrap { width: 200px; height: 4px; background: #333; border-radius: 2px; }
+    #progress-bar { height: 100%; width: 0; background: #4fa3e0; border-radius: 2px; transition: width 0.1s; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>peripheral-load-switch — Interactive 3D PCB View</h1>
+    <a href="https://github.com/matthias-bs/peripheral-load-switch" target="_blank">&#x2197; GitHub Repository</a>
+  </header>
+  <div id="hint">Drag to rotate &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Right-drag / two-finger drag to pan</div>
+  <div id="canvas-container">
+    <div id="loading">
+      <span>Loading 3D model…</span>
+      <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const container = document.getElementById('canvas-container');
+    const loadingEl = document.getElementById('loading');
+    const progressBar = document.getElementById('progress-bar');
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    container.appendChild(renderer.domElement);
+
+    // Scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a2e);
+
+    // Camera
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.001, 100);
+    camera.position.set(0.05, 0.04, 0.06);
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    keyLight.position.set(0.1, 0.15, 0.1);
+    keyLight.castShadow = true;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xc8d8ff, 0.6);
+    fillLight.position.set(-0.1, 0.05, -0.05);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xffd0a0, 0.4);
+    rimLight.position.set(0, -0.1, -0.1);
+    scene.add(rimLight);
+
+    // Floor / shadow plane
+    const floorGeo = new THREE.PlaneGeometry(1, 1);
+    const floorMat = new THREE.ShadowMaterial({ opacity: 0.25 });
+    const floor = new THREE.Mesh(floorGeo, floorMat);
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -0.002;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 0.01;
+    controls.maxDistance = 0.5;
+
+    // Load GLB
+    const loader = new GLTFLoader();
+    loader.load(
+      'load_switch.glb',
+      (gltf) => {
+        const model = gltf.scene;
+
+        // Center model
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
+
+        // Slightly tilt for a natural view
+        model.rotation.x = THREE.MathUtils.degToRad(-10);
+
+        // Enable shadows on all meshes
+        model.traverse((child) => {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+
+        scene.add(model);
+
+        // Fit camera to model
+        const size = box.getSize(new THREE.Vector3()).length();
+        controls.target.set(0, 0, 0);
+        camera.position.set(size * 0.6, size * 0.5, size * 0.8);
+        camera.near = size / 100;
+        camera.far = size * 10;
+        camera.updateProjectionMatrix();
+        controls.update();
+
+        loadingEl.style.display = 'none';
+      },
+      (xhr) => {
+        if (xhr.total) {
+          progressBar.style.width = (xhr.loaded / xhr.total * 100) + '%';
+        }
+      },
+      (error) => {
+        loadingEl.innerHTML = '<span style="color:#f88">Failed to load model: ' + error.message + '</span>';
+      }
+    );
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+
+    // Render loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>

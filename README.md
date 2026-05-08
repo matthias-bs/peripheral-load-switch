@@ -39,9 +39,9 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 
 ## Interactive 3D PCB View
 
-[![3D PCB render](docs/load_switch_3d_top.png)](https://github.com/matthias-bs/peripheral-load-switch/blob/main/docs/load_switch.glb)
+[![3D PCB render](docs/load_switch_3d_top.png)](https://matthias-bs.github.io/peripheral-load-switch/)
 
-*Click image to open the interactive 3D model (rotate/zoom) — or use [KiCanvas](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fmatthias-bs%2Fperipheral-load-switch%2Fblob%2Fmain%2Fload_switch.kicad_pcb) for a full PCB inspector*
+*Click image to open the interactive 3D model viewer (rotate/zoom/pan) — or use [KiCanvas](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fmatthias-bs%2Fperipheral-load-switch%2Fblob%2Fmain%2Fload_switch.kicad_pcb) for a full PCB layer inspector*
 
 ## Bill of Materials
 
@@ -52,8 +52,10 @@ A minimal, all-SMD load switch board for switching a peripheral's supply voltage
 | C_IN1    | 1 µF        | 0805             | Input decoupling capacitor         | [C1712](https://www.lcsc.com/product-detail/C1712.html)   |
 | C_OUT1   | 100 nF      | 0805             | Output decoupling capacitor        | [C126469](https://www.lcsc.com/product-detail/C126469.html) |
 | J1       | —           | Half-hole 5-pin 2.54 mm | Edge connector (IN, OUT, GND, GND, EN) | — |
-| J2       | —           | PinSocket 1×5 2.54 mm (DNP) | Debug/development header  | — |
+| J2       | —           | PinSocket 1×5 2.54 mm (DNP¹) | Debug/development header  | — |
 
+> ¹ DNP = Do Not Populate (component is present in schematic/PCB for optional use but not assembled by default)
+>
 > LCSC Part # are ordering references for [lcsc.com](https://lcsc.com).
 
 ## Connector Pinout (J1)
