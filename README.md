@@ -25,7 +25,7 @@ Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.p
 
 ## PCB & Schematic Features
 
-- All-SMD design; 0805 passives are hand-solderable, SC-70-6 IC requires reflow soldering
+- All-SMD design; 0805 passives are (more or less) hand-solderable, SC-70-6 IC requires reflow soldering
 - 1 MΩ pull-down on EN pin ensures switch-off when enable is floating
 - 1 µF input and 100 nF output decoupling capacitors
 - 5-pin 2.54 mm pitch half-hole edge connector (J1) for PCB-to-PCB or castellated mounting
