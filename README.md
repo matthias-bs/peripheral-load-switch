@@ -55,8 +55,8 @@ Datasheet: [SiP32431 (Vishay, PDF)](https://www.vishay.com/docs/66597/sip32431.p
 | R1       | 1 MΩ        | 0805             | Pull-down on EN pin                | [C17514](https://www.lcsc.com/product-detail/C17514.html)  |
 | C_IN1    | 1 µF        | 0805             | Input decoupling capacitor         | [C1712](https://www.lcsc.com/product-detail/C1712.html)   |
 | C_OUT1   | 100 nF      | 0805             | Output decoupling capacitor        | [C126469](https://www.lcsc.com/product-detail/C126469.html) |
-| J1       | —           | PinSocket 1×5 2.54 mm     | Optional pin header for prototyping | — |
-| J2       | —           | Half-hole 5-pin 2.54 mm (DNP¹) | Edge connector (GND, GND, EN, OUT, IN) | — |
+| J1       | —           | PinSocket 1×5 2.54 mm     | Optional pin header | — |
+| J2       | —           | Half-hole 5-pin 2.54 mm (DNP¹) | Edge connector | — |
 
 > ¹ DNP = Do Not Populate — the half-hole edge connector (J2) is a PCB manufacturing feature: the through-holes are routed in half at the board edge to form castellated contacts. No separate component is soldered.
 >
